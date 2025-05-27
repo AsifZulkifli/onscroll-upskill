@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'PP Mori';
+    src: url('../assets/fonts/PPMori-Variable.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+.font-PPMori{font-family: 'PP Mori';}
+
+@font-face {
+    font-family: 'DM Mono';
+    src: url('../assets/fonts/DMMono-Medium.eot');
+    src: url('../assets/fonts/DMMono-Medium.eot?#iefix') format('embedded-opentype'),
+        url('../assets/fonts/DMMono-Medium.woff2') format('woff2'),
+        url('../assets/fonts/DMMono-Medium.woff') format('woff'),
+        url('../assets/fonts/DMMono-Medium.ttf') format('truetype'),
+        url('../assets/fonts/DMMono-Medium.svg#DMMono-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+.font-DMMono{font-family: 'DM Mono';}
+
