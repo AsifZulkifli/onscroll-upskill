@@ -7,20 +7,38 @@ $(document).ready(function() {
   document.addEventListener("DOMContentLoaded", (event) => {
   gsap.registerPlugin(ScrollTrigger,ScrollSmoother)
     
-    // ScrollSmoother.create({
-    //   smooth: 1,
-    //   effects: true,
-    // });
+    ScrollSmoother.create({
+      smooth: 1,
+      effects: true,
+    });
 
-    let tl = gsap.timeline({
+
+    let keikku = gsap.timeline({
       scrollTrigger: {
         trigger: '.keikku',
         start: '-50% top',
-        end: '+=2000',
+        end: '+=3600',
+        scrub: true,
+        pin: true,
+        markers: false
+      }
+    });
+    keikku.fromTo(".keikku", { opacity: 1 }, { opacity: 1, duration: 2.5 })
+      .to(".keikku", { opacity: 0, duration: 0.5 }); 
+
+
+    let hand = gsap.timeline({
+      scrollTrigger: {
+        trigger: '.hand',
+        start: '-30% top',
+        end: '+=850',
+        scrub: true,
         pin: true,
         markers: true
       }
     });
+    hand.fromTo(".hand", { opacity: 0 }, { opacity: 1, duration: 2.5 })
+      .to(".hand", { opacity: 1, duration: 1 }); 
 
     const video = document.getElementById("meetvid")
 
@@ -28,9 +46,8 @@ $(document).ready(function() {
       scrollTrigger: {
         trigger: '.meetvid',
         start: "top top",
-        end: "+=1000",
+        end: "+=2000",
         pin: true,
-        pinSpacing: true,
         onEnter: () => {
           const vid = $('.meetvid')[0];
           const source = $(vid).find('source');
@@ -89,6 +106,61 @@ $(document).ready(function() {
       }
     });
 
-    
-  });
+    let tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".card",
+          start: "-120% center",  
+          end: "250% center",   
+          scrub: true,  
+          markers: false 
+        }
+      }
+    );  
+
+    tl.fromTo(".card", { opacity: 0 }, { opacity: 1, duration: 1 })
+      .to(".card", { opacity: 0, duration: 1 });  
+
+    let tl2 = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".card2",
+          start: "-120% center",  
+          end: "250% center",   
+          scrub: true,  
+          markers: false 
+        }
+      }
+    );  
+
+    tl2.fromTo(".card2", { opacity: 0 }, { opacity: 1, duration: 1 })
+      .to(".card2", { opacity: 0, duration: 1 }); 
+
+    let tl3 = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".card3",
+          start: "-120% center",  
+          end: "250% center",   
+          scrub: true,  
+          markers: false 
+        }
+      }
+    );  
+
+    tl3.fromTo(".card3", { opacity: 0 }, { opacity: 1, duration: 1 })
+      .to(".card3", { opacity: 0, duration: 1 }); 
+
+    let tl4 = gsap.timeline({
+        scrollTrigger: {
+          trigger: ".card4",
+          start: "-120% center",  
+          end: "250% center",   
+          scrub: true,  
+          markers: false 
+        }
+      }
+    );  
+
+    tl4.fromTo(".card4", { opacity: 0 }, { opacity: 1, duration: 1 })
+      .to(".card4", { opacity: 0, duration: 1 }); 
+
+});
 
