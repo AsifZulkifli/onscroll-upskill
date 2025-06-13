@@ -11,9 +11,11 @@
 
     <link href="./css/custom.css" rel="stylesheet">
     <link rel="stylesheet" href="./css/animate.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
@@ -46,6 +48,7 @@
 
 </head>
 <body> 
+    <canvas id="webgl" class="pointer-events-none"></canvas>
     <div id="smooth-wrapper" class="relative">
         <section class="nav">
             <div class="fixed z-10 flex items-center justify-center bottom-10 left-1/2 -translate-x-1/2 wow fadeInUp"  data-wow-duration="2s" data-wow-delay=".5s">
@@ -57,9 +60,9 @@
                     </div>
                     <div class="py-1">
                         <ul class="flex items-center justify-center">
-                            <li class="font-PPMori text-[13px] py-2 px-5 bg-[#2f32471a] rounded-full">Keikku</li>
-                            <li class="font-PPMori text-[13px] py-2 px-5 opacity-50">Discover</li>
-                            <li class="font-PPMori text-[13px] py-2 px-5 opacity-50">App</li>
+                            <li class="font-PPMori text-[13px] py-2 px-5 bg-[#2f32471a] rounded-full"><a href="">Keikku</a></li>
+                            <li class="font-PPMori text-[13px] py-2 px-5 opacity-50"><a href="">Discover</a></li>
+                            <li class="font-PPMori text-[13px] py-2 px-5 opacity-50"><a href="">App</a></li>
                         </ul>
                     </div>
                 </div>
@@ -69,22 +72,25 @@
                 </div>
             </div>
         </section>
+        
+        
+
         <div id="smooth-content">
-            <section id="hero" name="hero" class="bg-[#12131d] h-[1160px]">
+            <section id="hero" name="hero" class="crop bg-[#12131d] h-[1160px]">
                 <!-- <div class="bg-hero z-1 absolute bg-[gray] h-[120%] w-screen opacity-20"></div> -->
-                <div class="flex flex-col items-center justify-between h-[75%] py-10">
+                <div class="relative flex flex-col items-center justify-start h-[75%] py-10">
                     <div class="flex items-center justify-center p-6 wow fadeInDown" data-wow-duration="1.5s">
                         <span class="w-[60%]">
                             <svg viewBox="0 0 165 36" data-v-13d7cdb8="" class="w-full"><g class="logo" data-v-13d7cdb8=""><path d="M73.5781 24.0911V1.48828H76.6398V13.4393L87.698 1.48828H91.6185L82.757 10.8851L92.2221 24.0974H88.4635L80.6536 13.1176L76.6398 17.3809V24.0974H73.5781V24.0911Z" fill="white" data-v-13d7cdb8=""></path><path d="M100.698 24.4822C99.0432 24.4822 97.5683 24.1038 96.2864 23.3533C95.0045 22.6028 94.0088 21.5496 93.3056 20.2063C92.6024 18.863 92.2539 17.3242 92.2539 15.6025C92.2539 13.7484 92.6148 12.1339 93.3367 10.759C94.0586 9.38419 95.0418 8.3373 96.2864 7.62465C97.531 6.91201 98.8938 6.55884 100.381 6.55884C101.868 6.55884 103.293 6.9057 104.457 7.59312C105.621 8.28054 106.542 9.28329 107.195 10.5951C107.855 11.9068 108.191 13.4709 108.216 15.2809V16.0881H95.2472C95.3529 17.854 95.8943 19.2603 96.8713 20.3009C97.8484 21.3478 99.1241 21.8649 100.692 21.8649C101.819 21.8649 102.777 21.5875 103.561 21.0388C104.345 20.4901 104.899 19.7081 105.216 18.699H108.147C107.743 20.4838 106.884 21.8965 105.565 22.9308C104.246 23.965 102.621 24.4822 100.686 24.4822H100.698ZM105.098 13.7294C104.862 12.3105 104.333 11.1942 103.505 10.3869C102.677 9.5797 101.638 9.17608 100.381 9.17608C99.1241 9.17608 98.035 9.5797 97.1638 10.3869C96.2926 11.1942 95.7201 12.3105 95.4401 13.7294H105.098Z" fill="white" data-v-13d7cdb8=""></path><path d="M112.236 4.29479C111.639 4.29479 111.135 4.08667 110.724 3.66413C110.307 3.24159 110.102 2.73076 110.102 2.13163C110.102 1.5325 110.307 1.02167 110.724 0.61174C111.141 0.201811 111.645 0 112.236 0C112.827 0 113.331 0.208118 113.736 0.63066C114.14 1.0532 114.339 1.55142 114.339 2.13163C114.339 2.75598 114.134 3.27312 113.736 3.68305C113.338 4.09298 112.833 4.29479 112.236 4.29479ZM110.736 24.0912V6.9751H113.698V24.0912H110.736Z" fill="white" data-v-13d7cdb8=""></path><path d="M117.152 24.0911V1.48828H120.177V15.0853L128.08 6.98133H131.714L125.628 13.1807L132.641 24.0974H129.107L123.531 15.3439L120.183 18.7368V24.0974H117.159L117.152 24.0911Z" fill="white" data-v-13d7cdb8=""></path><path d="M133.938 24.0911V1.48828H136.962V15.0853L144.865 6.98133H148.499L142.413 13.1807L149.426 24.0974H145.892L140.316 15.3439L136.968 18.7368V24.0974H133.944L133.938 24.0911Z" fill="white" data-v-13d7cdb8=""></path><path d="M156.817 24.4822C155.479 24.4822 154.322 24.2236 153.345 23.7065C152.368 23.1894 151.621 22.4704 151.117 21.5433C150.607 20.6163 150.352 19.5631 150.352 18.3774V6.9751H153.382V18.245C153.382 19.3865 153.724 20.2694 154.415 20.8938C155.106 21.5181 156.033 21.8334 157.203 21.8334C158.647 21.8334 159.779 21.4109 160.595 20.5595C161.41 19.7081 161.833 18.636 161.852 17.3431V6.9751H164.882V24.0912H162.493L162.237 21.537C161.708 22.483 160.962 23.2146 160.01 23.7191C159.051 24.2236 157.993 24.4759 156.823 24.4759L156.817 24.4822Z" fill="white" data-v-13d7cdb8=""></path></g><g class="symbol" data-v-13d7cdb8=""><path d="M22.3477 24.0911C22.3477 11.604 32.3355 1.48193 44.657 1.48193C56.9785 1.48193 66.9663 11.604 66.9663 24.0911H22.3477Z" fill="white" data-v-13d7cdb8=""></path><path d="M0 24.0916C0 30.3481 5.00326 35.4188 11.1764 35.4188C17.3496 35.4188 22.3529 30.3481 22.3529 24.0916H0Z" fill="white" data-v-13d7cdb8=""></path></g></svg>
                         </span>
                     </div>
-                    <div class="flex flex-col items-center justify-center text-center text-white wow fadeInDown" data-wow-duration="1.5s" data-wow-delay=".2s">
-                        <h1 class="font-PPMori font-medium text-[96px] tracking-tighter leading-none bg-linear-to-t from-[#224aff] to-[#14bcff] text-transparent bg-clip-text">Don’t miss a beat</h1>
+                    <div class="flex flex-col items-center justify-center 2xl:mt-0 3xl:mt-16 text-center text-white wow fadeInDown" data-wow-duration="1.5s" data-wow-delay=".2s">
+                        <h1 class="font-PPMori font-medium text-[96px] tracking-tighter leading-none bg-linear-to-t from-[#224aff] to-[#14bcff] text-transparent bg-clip-text">Don’t miss a <span class="beat tracking-tight">beat</span></h1>
                         <p class="font-PPMori text-[22px] opacity-50">Keikku, our next generation digital stethoscope</p>
                     </div>
-                    <div id="keikku" class="z-9 keikku flex items-center justify-center mb-10">
-                        <img class="w-[50%]" src="./assets/img/header-keikku.png">
-                    </div>
+                    <!-- <div id="keikku" class="z-9 keikku flex items-center justify-center mb-30 3xl:mb-10">
+                        <img class="xl:w-[40%] 3xl:w-[50%]" src="./assets/img/header-keikku.png">
+                    </div> -->
                 </div>
                 <div class="flex flex-col items-center justify-center pt-8">
                     <p class="uppercase text-white font-DMMono text-[12px] my-6 opacity-50">As seen in</p>
@@ -142,40 +148,48 @@
                     </div>
                 </div>
 
-                <div class="z-9 absolute top-[50%] hand flex flex-col items-end justify-center mb-10 w-screen">
-                    <img class="w-[75%]" src="./assets/img/keikku-239.png">
+                <div class="z-11 absolute top-[50%] hand flex flex-col items-end justify-center mb-10 w-screen">
+                    <img id="hand-img" class="w-[75%]" src="./assets/img/keikku-239.png">
                 </div>
                 
                 <div class="w-[70%] mx-auto flex flex-col">
                     <h1 class="font-PPMori text-[65px] text-white leading-none tracking-tighter py-[8%]">Meet Keikku — your<br> new medical<br> superpower.</h1>
-                    <div class="flex w-full justify-between py-6">
-                        <button class="w-[24%]">
+                    <div class="z-10 flex w-full justify-between py-6">
+                        <button class="w-[24%] change-img" data-img="#img1" data-src="./assets/img/keikku-239.png">
                             <div class="flex items-center mr-6 mb-4">
                                 <img src="./assets/img/auscultation.png" alt="" class="pr-3">
                                 <p class="font-DMMono uppercase text-white text-[12px] text-start leading-[1.2]">Auscultation<br> Mode</p>
                             </div>
-                            <div class="bg-gray-700 w-full h-[4px] rounded-full"></div>
+                            <div class="bg-gray-700 w-full h-[4px] rounded-full overflow-hidden">
+                                <div class="z-10 progress-bar h-full w-0 bg-white transition-all duration-[4000ms]"></div>
+                            </div>
                         </button>
-                        <button class="w-[24%]">
+                        <button class="w-[24%] change-img" data-img="#img1" data-src="./assets/img/keikku-240.png">
                             <div class="flex items-center mr-6 mb-4">
                                 <img src="./assets/img/abnormal.png" alt="" class="pr-3">
                                 <p class="font-DMMono uppercase text-white text-[12px] text-start leading-[1.2]">Potential Patient<br> Abnormality</p>
                             </div>
-                            <div class="bg-gray-700 w-full h-[4px] rounded-full"></div>
+                            <div class="bg-gray-700 w-full h-[4px] rounded-full overflow-hidden">
+                                <div class="progress-bar h-full w-0 bg-white transition-all duration-[4000ms]"></div>
+                            </div>
                         </button>
-                        <button class="w-[24%]">
+                        <button class="w-[24%] change-img" data-img="#img1" data-src="./assets/img/keikku-241.png">
                             <div class="flex items-center mr-6 mb-4">
                                 <img src="./assets/img/outofbattery.png" alt="" class="pr-3">
                                 <p class="font-DMMono uppercase text-white text-[12px] text-start leading-[1.2]">Out of battery</p>
                             </div>
-                            <div class="bg-gray-700 w-full h-[4px] rounded-full"></div>
+                            <div class="bg-gray-700 w-full h-[4px] rounded-full overflow-hidden">
+                                <div class="progress-bar h-full w-0 bg-white transition-all duration-[4000ms]"></div>
+                            </div>
                         </button>
-                        <button class="w-[24%]">
+                        <button class="w-[24%] change-img" data-img="#img1" data-src="./assets/img/keikku-242.png">
                             <div class="flex items-center mr-6 mb-4">
                                 <img src="./assets/img/charging.png" alt="" class="pr-3">
                                 <p class="font-DMMono uppercase text-white text-[12px] text-start leading-[1.2]">Charging</p>
                             </div>
-                            <div class="bg-gray-700 w-full h-[4px] rounded-full"></div>
+                            <div class="bg-gray-700 w-full h-[4px] rounded-full overflow-hidden">
+                                <div class="progress-bar h-full w-0 bg-white transition-all duration-[4000ms]"></div>
+                            </div>
                         </button>
                     </div>
                     <div class="w-full h-[500px]">
@@ -183,9 +197,9 @@
                     </div>
                     <div class="w-[55%] mx-auto mb-[20%]">
                         <h3 class="font-PPMori text-center text-[#b9babd] text-[22px] py-2 leading-[1.2]">
-                            From <span class="text-white">seamless wireless connectivity</span> to the precision of <span class="text-white">Active Noise Cancellation</span> and the intuitive implementation of AI, every element is designed to enhance the act of <span class="text-white">listening to the sounds of health.</span>
+                            From <span class="text-white">seamless wireless connectivity</span> to the precision of <span class="text-white">Active Noise Cancellation</span> and the intuitive implementation of <span class="text-white">AI</span>, every element is designed to enhance the act of <span class="text-white">listening to the sounds of health.</span>
                         </h3>
-                        <h3 class="font-PPMori text-center text-white text-[22px] py-2 leading-[1.2]">
+                        <h3 class="font-PPMori text-center text-[#b9babd] text-[22px] py-2 leading-[1.2]">
                             Experience the <span class="text-white">true power of auscultation</span>, uncover health insights and elevate care to new heights with Keikku.
                         </h3>
                         <h3 class="font-PPMori text-center text-white text-[22px] py-2 leading-[1.2]">Welcome to the next generation of the digital stethoscope.</h3>
@@ -193,33 +207,77 @@
 
                     <div class="flex flex-col justify-center items-center">
                         <h1 class="font-PPMori text-[42px] text-white tracking-[-1px]">Your experience with Keikku</h1>
-                        <div class="flex mt-6 mb-[10%]">
-                            <div class="flex flex-col items-center justify-start h-[380px] w-[180px] bg-[#1c1e30] rounded-full my-4 mx-3 self-end">
-                                <img src="./assets/img/crop.png" class="pt-6 w-[140px]">
-                                <p class="font-PPMori text-[14px] text-white text-center pb-10 leading-none mx-6 my-auto">Crop and anotate</p>
+                        <div class="flex mt-6 mb-[10%]" id="experience-cards">
+                            <div id="card-crop" class="flex flex-col self-start items-center justify-start h-[180px] w-[180px] bg-[#1c1e30] rounded-full my-4 mx-3 self-end opacity-0">
+                                <img id="crop-img" src="./assets/img/crop.png" class="hidden pt-6 w-[140px] opacity-0">
+                                <p id="crop-text" class="font-PPMori text-[14px] text-white text-center pb-10 leading-none mx-6 my-auto hidden opacity-0">Crop and anotate</p>
                             </div>
-                            <div class="flex flex-col items-center justify-start h-[380px] w-[180px] bg-[#1c1e30] rounded-full my-4 mx-3 self-end">
-                                <img src="./assets/img/listen.png" class="pt-6 w-[140px]">
-                                <p class="font-PPMori text-[14px] text-white text-center pb-10 leading-none mx-6 my-auto">Listen to Cardiovascular, Lung and gastrointestinal Sound</p>
+                            <div id="card-crop2" class="flex flex-col self-start items-center justify-start h-[180px] w-[180px] bg-[#1c1e30] rounded-full my-4 mx-3 self-end opacity-0">
+                                <img id="crop-img2" src="./assets/img/listen.png" class="hidden pt-6 w-[140px] opacity-0">
+                                <p id="crop-text2" class="font-PPMori text-[14px] text-white text-center pb-10 leading-none mx-6 my-auto hidden opacity-0">Listen to Cardiovascular, Lung and gastrointestinal Sound</p>
                             </div>
-                            <div class="flex flex-col items-center justify-start h-[380px] w-[180px] bg-[#1c1e30] rounded-full my-4 mx-3 self-end">
-                                <img src="./assets/img/record.png" class="pt-6 w-[140px]">
-                                <p class="font-PPMori text-[14px] text-white text-center pb-10 leading-none mx-6 my-auto">Record, stream and share sounds</p>
+                            <div id="card-crop3" class="flex flex-col self-start items-center justify-start h-[180px] w-[180px] bg-[#1c1e30] rounded-full my-4 mx-3 self-end opacity-0">
+                                <img id="crop-img3" src="./assets/img/record.png" class="hidden pt-6 w-[140px] opacity-0">
+                                <p id="crop-text3" class="font-PPMori text-[14px] text-white text-center pb-10 leading-none mx-6 my-auto hidden opacity-0">Record, stream and share sounds</p>
                             </div>
-                            <div class="flex flex-col items-center justify-start h-[380px] w-[180px] bg-[#1c1e30] rounded-full my-4 mx-3 self-end">
-                                <img src="./assets/img/gesture.png" class="pt-6 w-[140px]">
-                                <p class="font-PPMori text-[14px] text-white text-center pb-10 leading-none mx-6 my-auto">Gesture control</p>
+                            <div id="card-crop4" class="flex flex-col self-start items-center justify-start h-[180px] w-[180px] bg-[#1c1e30] rounded-full my-4 mx-3 self-end opacity-0">
+                                <img id="crop-img4" src="./assets/img/gesture.png" class="hidden pt-6 w-[140px] opacity-0">
+                                <p id="crop-text4" class="font-PPMori text-[14px] text-white text-center pb-10 leading-none mx-6 my-auto hidden opacity-0">Gesture control</p>
                             </div>
-                            <div class="flex flex-col items-center justify-start h-[380px] w-[180px] bg-[#1c1e30] rounded-full my-4 mx-3 self-end">
-                                <img src="./assets/img/noise.png" class="pt-6 w-[140px]">
-                                <p class="font-PPMori text-[14px] text-white text-center pb-10 leading-none mx-6 my-auto">Activate noise cancellation</p>
+                            <div id="card-crop5" class="flex flex-col self-start items-center justify-start h-[180px] w-[180px] bg-[#1c1e30] rounded-full my-4 mx-3 self-end opacity-0">
+                                <img id="crop-img5" src="./assets/img/noise.png" class="hidden pt-6 w-[140px] opacity-0">
+                                <p id="crop-text5" class="font-PPMori text-[14px] text-white text-center pb-10 leading-none mx-6 my-auto hidden opacity-0">Activate noise cancellation</p>
                             </div>
-                            <div class="flex flex-col items-center justify-start h-[380px] w-[180px] bg-[#1c1e30] rounded-full my-4 mx-3 self-end">
-                                <img src="./assets/img/cloud.png" class="pt-6 w-[140px]">
-                                <p class="font-PPMori text-[14px] text-white text-center pb-10 leading-none mx-6 my-auto">Cloud security, HIPAA, compliant and cyber secure</p>
+                            <div id="card-crop6" class="flex flex-col self-start items-center justify-start h-[180px] w-[180px] bg-[#1c1e30] rounded-full my-4 mx-3 self-end opacity-0">
+                                <img id="crop-img6" src="./assets/img/cloud.png" class="hidden pt-6 w-[140px] opacity-0">
+                                <p id="crop-text6" class="font-PPMori text-[14px] text-white text-center pb-10 leading-none mx-6 my-auto hidden opacity-0">Cloud security, HIPAA, compliant and cyber secure</p>
                             </div>
                         </div>
                     </div>
+                </div>
+            </section>
+            <section id="discover" name="discover" class="bg-[#1e1328] py-30">
+                <div class="w-[70%] mx-auto">
+                    <h3 class="gradient-unlock font-PPMori text-[38px] text-[#d0a3dc] leading-none">Unlock powerful insights with the <br>most advanced stethoscope.</h3>
+                </div>
+                <!-- Slider main container -->
+                <div class="swiper w-full h-[600px] my-20 overflow-visible">
+                    <!-- Additional required wrapper -->
+                    <div class="swiper-wrapper">
+                        <!-- Slides -->
+                        <div class="swiper-slide">
+                            <div class="w-[75%] h-full rounded-2xl mx-auto overflow-hidden">
+                                <iframe class="w-full h-full" src="https://player.vimeo.com/video/1011325759?h=e48686b601&amp;amp;badge=0&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&amp;playsinline=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" title="Keikku" data-v-d9f06bcb=""></iframe>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="w-[75%] h-full rounded-2xl mx-auto overflow-hidden">
+                                <iframe class="w-full h-full" src="https://player.vimeo.com/video/1011351038?h=37ef689e2d&amp;amp;badge=0&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&amp;playsinline=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" title="Keikku" data-v-d9f06bcb=""></iframe>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="w-[75%] h-full rounded-2xl mx-auto overflow-hidden">
+                                <iframe class="w-full h-full" src="https://player.vimeo.com/video/1011345846?h=c197557c5e&amp;amp;badge=0&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&amp;playsinline=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" title="Keikku" data-v-d9f06bcb=""></iframe>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="w-[75%] h-full rounded-2xl mx-auto overflow-hidden">
+                                <iframe class="w-full h-full" src="https://player.vimeo.com/video/1011338622?h=9c3218dad4&amp;amp;badge=0&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&amp;playsinline=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" title="Keikku" data-v-d9f06bcb=""></iframe>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="w-[75%] h-full rounded-2xl mx-auto overflow-hidden">
+                                <iframe class="w-full h-full" src="https://player.vimeo.com/video/1014352509?badge=0&amp;amp;autopause=0&amp;amp;player_id=0&amp;amp;app_id=58479&amp;playsinline=0" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" title="Keikku" data-v-d9f06bcb=""></iframe>
+                            </div>
+                        </div>
+                        ...
+                    </div>
+                    <!-- If we need pagination -->
+                    <div class="swiper-pagination duration-200"></div>
+
+                    <!-- If we need navigation buttons -->
+                    <div class="swiper-button-prev duration-200"></div>
+                    <div class="swiper-button-next duration-200"></div>
                 </div>
             </section>
         </div>
@@ -227,6 +285,8 @@
 
     <script src="./js/wow.min.js" ></script>
     <script src="./js/custom.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 </html>

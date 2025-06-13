@@ -21,3 +21,89 @@
 }
 .font-DMMono{font-family: 'DM Mono';}
 
+.section {
+  will-change: transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+html, body {
+  overflow-x: hidden;
+}
+
+body.loading {
+  overflow: hidden;
+}
+
+.pin-spacer {
+  pointer-events: none;
+}
+
+.section {
+  backface-visibility: hidden;
+  transform: translate3d(0,0,0); /* GPU acceleration */
+}
+
+#webgl {
+  position: fixed;
+  top: 60%;
+  left: 50%;
+  width: 100vw;
+  height: 100vh;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.gradient-unlock {
+  background: linear-gradient(180deg, #ffdada -2.89%, #5f20e4 90.86%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  white-space: pre-line;
+}
+
+.swiper {
+  overflow: visible !important;
+}
+
+.swiper-button-disabled{
+  display: none !important;
+}
+
+.swiper-button-next{
+    right: var(--swiper-navigation-sides-offset, 150px) !important;
+    left: auto !important;
+    color: #3e3446 !important;
+    font-weight: bold !important;
+}
+
+.swiper-button-prev{
+    left: var(--swiper-navigation-sides-offset, 150px) !important;
+    right: auto !important;
+    color: #3e3446 !important;
+    font-weight: bold !important;
+}
+
+.swiper-button-next:hover, .swiper-button-prev:hover{
+  color: white !important;
+}
+
+.swiper-pagination-bullet {
+    background-color: #3d3446 !important;
+    opacity: 1 !important;
+    width: var(--swiper-pagination-bullet-width, var(--swiper-pagination-bullet-size, 16px)) !important;
+    height: var(--swiper-pagination-bullet-height, var(--swiper-pagination-bullet-size, 6px)) !important;
+    border-radius: var(--swiper-pagination-bullet-border-radius, 10px) !important;
+}
+
+.swiper-pagination-bullet-active{
+    background-color: white !important;
+    width: var(--swiper-pagination-bullet-width, var(--swiper-pagination-bullet-size, 40px)) !important;
+}
+
+.swiper-pagination {
+  bottom: -10% !important;
+  z-index: 50 !important;
+}
