@@ -109,21 +109,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
       ease: "power1.inOut" 
     });
 
-
-    let keikku = gsap.timeline({
-      scrollTrigger: {
-        trigger: '.keikku',
-        start: '-40% top',
-        end: '+=3600',
-        scrub: true,
-        pin: true,
-        markers: false
-      }
-    });
-    keikku.fromTo(".keikku", { opacity: 1 }, { opacity: 1, duration: 2.5 })
-      .to(".keikku", { opacity: 0, duration: 0.5 }); 
-
-
     let hand = gsap.timeline({
       scrollTrigger: {
         trigger: '.hand',
@@ -472,27 +457,31 @@ document.addEventListener("DOMContentLoaded", (event) => {
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(window.devicePixelRatio);
 
+  // LIGHT for standard material
+  const light = new THREE.DirectionalLight(0xffffff, 1);
+  light.position.set(2, 5, 5);
+  scene.add(light);
+
+  const geometry = new THREE.CylinderGeometry(1.3, 1.3, 1.0, 64);
   const materials = [
-    new THREE.MeshBasicMaterial({ color: 0x5198f5 }),
-    new THREE.MeshBasicMaterial({ color: 0x5198f5 }),
-    new THREE.MeshBasicMaterial({ color: 0x5198f5 }),
-    new THREE.MeshBasicMaterial({ color: 0x5198f5 }),
-    new THREE.MeshBasicMaterial({ color: 0xb1b7c9 }),
-    new THREE.MeshBasicMaterial({ color: 0xb1b7c9 })
+    new THREE.MeshStandardMaterial({ color: 0x5198f5 }),
+    new THREE.MeshStandardMaterial({ color: 0xffffff }), 
+    new THREE.MeshStandardMaterial({ color: 0xffffff })  
   ];
+  const stethoscopeHead = new THREE.Mesh(geometry, materials);
+  stethoscopeHead.rotation.x = Math.PI / 2;
+  stethoscopeHead.rotation.y = Math.PI / -5;
+  stethoscopeHead.rotation.z = Math.PI / 4;
+  scene.add(stethoscopeHead);
 
-  const geometry = new THREE.BoxGeometry(2, 2, 1.15);
-  const cube = new THREE.Mesh(geometry, materials);
-  scene.add(cube);
-
-  cube.rotation.set(Math.PI / -6, Math.PI / -6, 0);
-
+  // Animate
   function animate() {
     requestAnimationFrame(animate);
     renderer.render(scene, camera);
   }
   animate();
 
+  // Timeline
   const rotationTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: ".crop",
@@ -504,16 +493,27 @@ document.addEventListener("DOMContentLoaded", (event) => {
   });
 
   rotationTimeline
-    .to(cube.rotation, { x:  0, y:  0, duration: 1000 }) 
-    .to(cube.rotation, { x: 0, y: Math.PI / 1, duration: 1000 })
-    .to(cube.rotation, { x: 1.5, y: Math.PI / 1, duration: 1000 })
-    .to("#webgl", { opacity: 0, duration: 200 });                         // Fade out
+    .to("#webgl", { top: "50%", ease: "power2.inOut", duration: 1000 })
+    .to(stethoscopeHead.rotation, { x: Math.PI / 2, y: 0, z: 0, duration: 500 })
+    .to(stethoscopeHead.rotation, { x: Math.PI / 2, y: 0, z: Math.PI / -1, duration: 1500 })
+    .to(stethoscopeHead.rotation, { x: Math.PI, y: Math.PI, duration: 500 })
+    .to("#webgl", { top: "60%", ease: "power2.inOut", duration: 1000 })
+    .to("#webgl", { opacity: 0, duration: 600 }); // Fade out
 
+  // Resize
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
-
 });
+
+  const rive = new rive.Rive({
+    src: './your_animation.riv',         // ✔️ make sure the path is correct
+    canvas: document.getElementById('riveCanvas'),
+    autoplay: true,
+    onLoad: () => {
+      console.log('Rive loaded!');
+    },
+  });

@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="./css/animate.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
+    <script src="https://unpkg.com/@rive-app/canvas@2.7.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -48,7 +49,7 @@
 
 </head>
 <body> 
-    <canvas id="webgl" class="pointer-events-none"></canvas>
+    <canvas id="webgl" class="webgl pointer-events-none"></canvas>
     <div id="smooth-wrapper" class="relative">
         <section class="nav">
             <div class="fixed z-10 flex items-center justify-center bottom-10 left-1/2 -translate-x-1/2 wow fadeInUp"  data-wow-duration="2s" data-wow-delay=".5s">
@@ -279,6 +280,92 @@
                     <div class="swiper-button-prev duration-200"></div>
                     <div class="swiper-button-next duration-200"></div>
                 </div>
+                <div class="w-[70%] mx-auto py-[15%]">
+                    <p class="gradient-unlock font-PPMori text-[150px] text-[#d0a3dc] leading-none tracking-[-6px]">Built from the <br>ground up</p>
+                </div>
+
+                <div class="w-[60%] mx-auto py-[15%]">
+                    <p class="gradient-unlock font-PPMori text-[60px] text-[#d0a3dc] leading-none  tracking-[-2px] py-10 pr-[20%]">Keikku, developed at the intersection of innovation and precision</p>
+                    <div class="h-[630px] flex">
+                        <div class="relative w-[60%] h-full rounded-3xl overflow-hidden mr-5">
+                            <video src="./assets/vid/active-noise.mp4" type="video/mp4" class="w-full z-9 h-full object-cover" autoplay loop muted playsinline></video>
+                            <p class="absolute top-12 left-1/2 -translate-x-1/2 font-PPMori text-[#d2c2e6] text-[38px] z-10 text-center leading-[1.1]">Active noise cancellation</p>
+                        </div>
+                        <div class="w-[40%] h-full overflow-hidden">
+                            <div class="bg-[#180e22] w-full h-[49%] rounded-3xl mb-5">
+                                <div class="w-[85%] mx-auto pt-8">
+                                    <p class="gradient-unlock uppercase font-DMMono text-[10px] tracking-wider">A battery that holds</p>
+                                </div>
+                                <canvas id="riveCanvas" class="top-0 left-0 z-20 pointer-events-none"></canvas>
+                                <div class="w-[85%] mx-auto">
+                                    <p class="gradient-unlock font-PPMori text-left text-[42px] leading-none tracking-tight">all heartbeats,</p>
+                                    <p class="gradient-unlock font-PPMori text-right text-[42px] leading-none tracking-tight">all week.</p>
+                                </div>
+                            </div>
+                            <div class="bg-[url(./assets/img/snippets-map.png)] bg-center bg-cover w-full h-[47%] rounded-3xl">
+                                <canvas id="riveCanvas" class="top-0 left-0 z-20 pointer-events-none"></canvas>
+                                <div class="w-[85%] mx-auto pr-18">
+                                    <p class="text-[#d2c2e6] font-PPMori text-left text-[20px] leading-none tracking-tight">Quickly locate your Keikku, ensuring it’s always within reach when you need it most.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="relative flex w-full h-[350px] justify-center">
+                    <div class="absolute -bottom-[29%] left-0 bg-[#180e22] w-[35%] pt-8 pb-2 rounded-b-full flex flex-col items-center justify-center">
+                        <p class="gradient-unlock font-PPMori text-center text-[42px] leading-none tracking-tight py-6">Movement activation <br>& control</p>
+                        <div class="flex w-[60%]">
+                            <div class="flex w-[50%]">
+                                <img class="h-[45%] px-2" src="./assets/img/built-in-snippet-1.png">
+                                <p class="w-full text-white uppercase font-DMMono text-[10px] tracking-wider">On-off <br>movement <br>capabilities</p>
+                            </div>
+                            <div class="flex w-[50%]">
+                                <img class="h-[55%] px-2" src="./assets/img/built-in-snippet-2.png">
+                                <p class="text-white uppercase font-DMMono text-[10px] tracking-wider">Sound <br>control <br>capabilities</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute -top-[30%] left-[35%] bg-[#180e22] w-[40%] pt-10 rounded-t-full flex flex-col items-center justify-center">
+                        <p class="gradient-unlock uppercase font-DMMono text-[10px] tracking-wider">LED Interactive Interface</p>
+                        <p class="gradient-unlock font-PPMori text-left text-[42px] tracking-tight py-6">Real-time feedback</p>
+                        <video src="./assets/vid/features-feedback.mp4" type="video/mp4" class="w-[50%] h-full object-cover" autoplay loop muted playsinline></video>
+                    </div>
+                    <div class="absolute -bottom-[8%] right-0 bg-[#180e22] w-[25%] py-8 rounded-b-full flex flex-col items-center justify-center">
+                        <video src="./assets/vid/features-slider.mp4" type="video/mp4" class="w-[50%] h-full object-cover" autoplay loop muted playsinline></video>
+                        <p class="gradient-unlock font-PPMori text-center text-[24px] leading-none tracking-tight py-6">Customizable <br>LED RGB</p>
+                    </div>
+                </div>
+
+                <div class="w-[60%] mx-auto pt-[15%]">
+                    <div class="h-[630px] flex">
+                        <div class="relative w-[40%] h-full rounded-3xl overflow-hidden mr-5">
+                            <video src="./assets/vid/active-noise.mp4" type="video/mp4" class="w-full z-9 h-full object-cover" autoplay loop muted playsinline></video>
+                            <p class="absolute top-12 left-1/2 -translate-x-1/2 font-PPMori text-[#d2c2e6] text-[38px] z-10 text-center leading-[1.1]">Wireless Superior Audio</p>
+                        </div>
+                        <div class="w-[60%] h-full overflow-hidden">
+                            <div class="bg-[url(./assets/img/snippets-sharing.png)] bg-cover bg-right w-full h-[49%] rounded-3xl mb-5">
+                                <div class="w-[85%] mx-auto pt-8">
+                                    <p class="gradient-unlock uppercase font-DMMono text-[10px] tracking-wider">A battery that holds</p>
+                                </div>
+                                <canvas id="riveCanvas" class="top-0 left-0 z-20 pointer-events-none"></canvas>
+                                <div class="w-[85%] mx-auto">
+                                    <p class="gradient-unlock font-PPMori text-left text-[42px] leading-none tracking-tight">all heartbeats,</p>
+                                    <p class="gradient-unlock font-PPMori text-right text-[42px] leading-none tracking-tight">all week.</p>
+                                </div>
+                            </div>
+                            <div class="bg-[#180e22] bg-center bg-cover w-full h-[47%] rounded-3xl">
+                                <div class="w-[85%] mx-auto pt-8">
+                                    <p class="gradient-unlock uppercase font-DMMono text-[10px] tracking-wider">Pocket clip</p>
+                                </div>
+                                <canvas id="riveCanvas" class="top-0 left-0 z-20 pointer-events-none"></canvas>
+                                <div class="w-[85%] mx-auto pr-18">
+                                    <p class="text-[#d2c2e6] font-PPMori text-left text-[20px] leading-none tracking-tight">Quickly locate your Keikku, ensuring it’s always within reach when you need it most.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
             </section>
         </div>
     </div>
