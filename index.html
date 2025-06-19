@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="./css/animate.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
 
-    <script src="https://unpkg.com/@rive-app/canvas@2.7.1"></script>
+    <script src="https://unpkg.com/@rive-app/canvas"></script>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -210,27 +210,39 @@
                         <h1 class="font-PPMori text-[42px] text-white tracking-[-1px]">Your experience with Keikku</h1>
                         <div class="flex mt-6 mb-[10%]" id="experience-cards">
                             <div id="card-crop" class="flex flex-col self-start items-center justify-start h-[180px] w-[180px] bg-[#1c1e30] rounded-full my-4 mx-3 self-end opacity-0">
-                                <img id="crop-img" src="./assets/img/crop.png" class="hidden pt-6 w-[140px] opacity-0">
+                                <div id="crop-img" class="hidden flex items-center justify-center pt-6 w-[150px] opacity-0">
+                                    <canvas id="wave" width="120" height="180"></canvas>
+                                </div>
                                 <p id="crop-text" class="font-PPMori text-[14px] text-white text-center pb-10 leading-none mx-6 my-auto hidden opacity-0">Crop and anotate</p>
                             </div>
                             <div id="card-crop2" class="flex flex-col self-start items-center justify-start h-[180px] w-[180px] bg-[#1c1e30] rounded-full my-4 mx-3 self-end opacity-0">
-                                <img id="crop-img2" src="./assets/img/listen.png" class="hidden pt-6 w-[140px] opacity-0">
+                                <div id="crop-img2" class="hidden flex items-center justify-center pt-6 w-[150px] opacity-0">
+                                    <canvas id="wave2" width="120" height="180"></canvas>
+                                </div>
                                 <p id="crop-text2" class="font-PPMori text-[14px] text-white text-center pb-10 leading-none mx-6 my-auto hidden opacity-0">Listen to Cardiovascular, Lung and gastrointestinal Sound</p>
                             </div>
                             <div id="card-crop3" class="flex flex-col self-start items-center justify-start h-[180px] w-[180px] bg-[#1c1e30] rounded-full my-4 mx-3 self-end opacity-0">
-                                <img id="crop-img3" src="./assets/img/record.png" class="hidden pt-6 w-[140px] opacity-0">
+                                <div id="crop-img3" class="hidden flex items-center justify-center pt-6 w-[150px] opacity-0">
+                                    <canvas id="wave3" width="120" height="180"></canvas>
+                                </div>
                                 <p id="crop-text3" class="font-PPMori text-[14px] text-white text-center pb-10 leading-none mx-6 my-auto hidden opacity-0">Record, stream and share sounds</p>
                             </div>
                             <div id="card-crop4" class="flex flex-col self-start items-center justify-start h-[180px] w-[180px] bg-[#1c1e30] rounded-full my-4 mx-3 self-end opacity-0">
-                                <img id="crop-img4" src="./assets/img/gesture.png" class="hidden pt-6 w-[140px] opacity-0">
+                                <div id="crop-img4" class="hidden flex items-center justify-center pt-6 w-[150px] opacity-0">
+                                    <canvas id="wave4" width="120" height="180"></canvas>
+                                </div>
                                 <p id="crop-text4" class="font-PPMori text-[14px] text-white text-center pb-10 leading-none mx-6 my-auto hidden opacity-0">Gesture control</p>
                             </div>
                             <div id="card-crop5" class="flex flex-col self-start items-center justify-start h-[180px] w-[180px] bg-[#1c1e30] rounded-full my-4 mx-3 self-end opacity-0">
-                                <img id="crop-img5" src="./assets/img/noise.png" class="hidden pt-6 w-[140px] opacity-0">
+                                <div id="crop-img5" class="hidden flex items-center justify-center pt-6 w-[150px] opacity-0">
+                                    <canvas id="wave5" width="120" height="180"></canvas>
+                                </div>
                                 <p id="crop-text5" class="font-PPMori text-[14px] text-white text-center pb-10 leading-none mx-6 my-auto hidden opacity-0">Activate noise cancellation</p>
                             </div>
                             <div id="card-crop6" class="flex flex-col self-start items-center justify-start h-[180px] w-[180px] bg-[#1c1e30] rounded-full my-4 mx-3 self-end opacity-0">
-                                <img id="crop-img6" src="./assets/img/cloud.png" class="hidden pt-6 w-[140px] opacity-0">
+                                <div id="crop-img6" class="hidden flex items-center justify-center pt-6 w-[150px] opacity-0">
+                                    <canvas id="wave6" width="120" height="180"></canvas>
+                                </div>
                                 <p id="crop-text6" class="font-PPMori text-[14px] text-white text-center pb-10 leading-none mx-6 my-auto hidden opacity-0">Cloud security, HIPAA, compliant and cyber secure</p>
                             </div>
                         </div>
@@ -280,11 +292,12 @@
                     <div class="swiper-button-prev duration-200"></div>
                     <div class="swiper-button-next duration-200"></div>
                 </div>
-                <div class="w-[70%] mx-auto py-[15%]">
+                <div class="w-[70%] mx-auto pt-[15%]">
                     <p class="gradient-unlock font-PPMori text-[150px] text-[#d0a3dc] leading-none tracking-[-6px]">Built from the <br>ground up</p>
+                    <img class="w-[75%] mx-auto" src="./assets/img/skeleton.png">
                 </div>
 
-                <div class="w-[60%] mx-auto py-[15%]">
+                <div class="w-[60%] mx-auto pb-[15%] pt-[5%]">
                     <p class="gradient-unlock font-PPMori text-[60px] text-[#d0a3dc] leading-none  tracking-[-2px] py-10 pr-[20%]">Keikku, developed at the intersection of innovation and precision</p>
                     <div class="h-[630px] flex">
                         <div class="relative w-[60%] h-full rounded-3xl overflow-hidden mr-5">
@@ -296,14 +309,21 @@
                                 <div class="w-[85%] mx-auto pt-8">
                                     <p class="gradient-unlock uppercase font-DMMono text-[10px] tracking-wider">A battery that holds</p>
                                 </div>
-                                <canvas id="riveCanvas" class="top-0 left-0 z-20 pointer-events-none"></canvas>
+                                <div class="w-full py-6 flex items-center justify-center mx-auto">
+                                    <canvas id="battery" width="150" height="90"></canvas>
+                                </div>
                                 <div class="w-[85%] mx-auto">
                                     <p class="gradient-unlock font-PPMori text-left text-[42px] leading-none tracking-tight">all heartbeats,</p>
                                     <p class="gradient-unlock font-PPMori text-right text-[42px] leading-none tracking-tight">all week.</p>
                                 </div>
                             </div>
                             <div class="bg-[url(./assets/img/snippets-map.png)] bg-center bg-cover w-full h-[47%] rounded-3xl">
-                                <canvas id="riveCanvas" class="top-0 left-0 z-20 pointer-events-none"></canvas>
+                                <div class="w-[85%] mx-auto pt-8">
+                                    <p class="gradient-unlock uppercase font-DMMono text-[10px] tracking-wider">Last location</p>
+                                </div>
+                                <div class="w-full flex items-center justify-center mx-auto -mt-8">
+                                    <canvas id="map-pin" width="180" height="180"></canvas>
+                                </div>
                                 <div class="w-[85%] mx-auto pr-18">
                                     <p class="text-[#d2c2e6] font-PPMori text-left text-[20px] leading-none tracking-tight">Quickly locate your Keikku, ensuring it’s always within reach when you need it most.</p>
                                 </div>
@@ -338,28 +358,33 @@
 
                 <div class="w-[60%] mx-auto pt-[15%]">
                     <div class="h-[630px] flex">
-                        <div class="relative w-[40%] h-full rounded-3xl overflow-hidden mr-5">
-                            <video src="./assets/vid/active-noise.mp4" type="video/mp4" class="w-full z-9 h-full object-cover" autoplay loop muted playsinline></video>
-                            <p class="absolute top-12 left-1/2 -translate-x-1/2 font-PPMori text-[#d2c2e6] text-[38px] z-10 text-center leading-[1.1]">Wireless Superior Audio</p>
+                        <div class="w-[40%] h-full rounded-3xl overflow-hidden py-8 mr-5 bg-gradient-to-t from-[#5f20e3] from-5% via-[#a976df] via-[50%] to-[#FFDADA] to-100%">
+                            <p class="font-PPMori text-white text-[38px] text-center leading-[1.1] tracking-tight">Wireless <br>Superior <br>Audio</p>
+                            <div class="w-full pt-10 flex items-center justify-center mx-auto">
+                                <canvas id="sound-wave" width="300" height="300"></canvas>
+                            </div>
+                            <div class="flex flex-col items-center justify-center w-[75%] mx-auto -mt-8">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42" fill="none"><circle cx="21" cy="21" r="21" fill="white" data-v-f63e6c99=""></circle><path d="M16 16.7L26 24.775L20.7619 30V11L26 16.225L16 24.3" stroke="#976FE5" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" data-v-f63e6c99=""></path></svg>
+                                <p class="font-PPMori text-white text-[22px] text-center leading-[1.1] pt-4">Bluetooth enabled headphone, earphone or speaker</p>
+                            </div>
                         </div>
                         <div class="w-[60%] h-full overflow-hidden">
-                            <div class="bg-[url(./assets/img/snippets-sharing.png)] bg-cover bg-right w-full h-[49%] rounded-3xl mb-5">
-                                <div class="w-[85%] mx-auto pt-8">
-                                    <p class="gradient-unlock uppercase font-DMMono text-[10px] tracking-wider">A battery that holds</p>
+                            <div class="relative z-1 bg-[url(./assets/img/snippets-sharing.png)] bg-cover bg-center w-full h-[49%] rounded-3xl mb-5 overflow-hidden">
+                                <div class="w-[35%] z-10 py-6 pl-6">
+                                    <p class="text-[#d2c2e6] font-PPMori text-left text-[34px] leading-[1.1] tracking-tight pb-2">Sharing, Recording & Streaming</p>
+                                    <p class="text-[#d2c2e6] font-PPMori text-left text-[22px] leading-[1.1] tracking-tight">Embedded telemedicine at your fingertips</p>
                                 </div>
-                                <canvas id="riveCanvas" class="top-0 left-0 z-20 pointer-events-none"></canvas>
-                                <div class="w-[85%] mx-auto">
-                                    <p class="gradient-unlock font-PPMori text-left text-[42px] leading-none tracking-tight">all heartbeats,</p>
-                                    <p class="gradient-unlock font-PPMori text-right text-[42px] leading-none tracking-tight">all week.</p>
-                                </div>
+                                <div class="absolute top-0 bg-gradient-to-l from-transparent from-50% to-[#191421] to-75% w-full h-full -z-1"></div>
                             </div>
-                            <div class="bg-[#180e22] bg-center bg-cover w-full h-[47%] rounded-3xl">
+                            <div class="bg-gradient-to-l from-[#301c38] from-0% to-[#191421] to-100% bg-center bg-cover w-full h-[47%] rounded-3xl">
                                 <div class="w-[85%] mx-auto pt-8">
                                     <p class="gradient-unlock uppercase font-DMMono text-[10px] tracking-wider">Pocket clip</p>
                                 </div>
-                                <canvas id="riveCanvas" class="top-0 left-0 z-20 pointer-events-none"></canvas>
-                                <div class="w-[85%] mx-auto pr-18">
-                                    <p class="text-[#d2c2e6] font-PPMori text-left text-[20px] leading-none tracking-tight">Quickly locate your Keikku, ensuring it’s always within reach when you need it most.</p>
+                                <div class="flex w-[85%] mx-auto -mt-4">
+                                    <div class="w-[60%] flex items-center justify-center">
+                                        <p class="gradient-unlock font-PPMori text-left text-[40px] leading-[1.1] tracking-tight">Store your Keikku in your pocket or on your clip</p>
+                                    </div>
+                                    <img class="w-[35%]" src="./assets/img/snippets-pocket-clip.png">
                                 </div>
                             </div>
                         </div>
@@ -375,5 +400,7 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.150.1/build/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
 </body>
 </html>

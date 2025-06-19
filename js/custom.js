@@ -33,6 +33,109 @@ const swiper = new Swiper('.swiper', {
   },
 });
 
+const wave = new window.rive.Rive({
+  src: './assets/vid/waves1.riv',
+  canvas: document.getElementById("wave"),
+  autoplay: true,
+  onLoad: () => {
+    const anim = wave.animationNames[0];
+
+    const canvas = document.getElementById("wave");
+
+    canvas.addEventListener("mouseenter", () => {
+      wave.play(anim);
+    });
+  }
+});
+const wave2 = new window.rive.Rive({
+  src: './assets/vid/waves2.riv',
+  canvas: document.getElementById("wave2"),
+  autoplay: true,
+  onLoad: () => {
+    const anim = wave2.animationNames[0];
+
+    const canvas = document.getElementById("wave2");
+
+    canvas.addEventListener("mouseenter", () => {
+      wave2.play(anim);
+    });
+  }
+});
+const wave3 = new window.rive.Rive({
+  src: './assets/vid/waves3.riv',
+  canvas: document.getElementById("wave3"),
+  autoplay: true,
+  onLoad: () => {
+    const anim = wave3.animationNames[0];
+
+    const canvas = document.getElementById("wave3");
+
+    canvas.addEventListener("mouseenter", () => {
+      wave3.play(anim);
+    });
+  }
+});
+const wave4 = new window.rive.Rive({
+  src: './assets/vid/waves4.riv',
+  canvas: document.getElementById("wave4"),
+  autoplay: true,
+  onLoad: () => {
+    const anim = wave4.animationNames[0];
+
+    const canvas = document.getElementById("wave4");
+
+    canvas.addEventListener("mouseenter", () => {
+      wave4.play(anim);
+    });
+  }
+});
+const wave5 = new window.rive.Rive({
+  src: './assets/vid/waves5.riv',
+  canvas: document.getElementById("wave5"),
+  autoplay: true,
+  onLoad: () => {
+    const anim = wave5.animationNames[0];
+
+    const canvas = document.getElementById("wave5");
+
+    canvas.addEventListener("mouseenter", () => {
+      wave5.play(anim);
+    });
+  }
+});
+const wave6 = new window.rive.Rive({
+  src: './assets/vid/waves6.riv',
+  canvas: document.getElementById("wave6"),
+  autoplay: true,
+  onLoad: () => {
+    const anim = wave6.animationNames[0];
+
+    const canvas = document.getElementById("wave6");
+
+    canvas.addEventListener("mouseenter", () => {
+      wave6.play(anim);
+    });
+  }
+});
+
+const battery = new window.rive.Rive({
+  src: './assets/vid/battery-holds.riv',
+  canvas: document.getElementById("battery"),
+  autoplay: true,
+});
+
+const mapPin = new window.rive.Rive({
+  src: './assets/vid/map-pin.riv',
+  canvas: document.getElementById("map-pin"),
+  autoplay: true,
+});
+
+const soundWave = new window.rive.Rive({
+  src: './assets/vid/sound-wave.riv',
+  canvas: document.getElementById("sound-wave"),
+  autoplay: true,
+});
+
 $(document).ready(function () {
     $('.change-img').on('click', function () {
       const newSrc = $(this).data('src');
@@ -493,11 +596,12 @@ document.addEventListener("DOMContentLoaded", (event) => {
   });
 
   rotationTimeline
-    .to("#webgl", { top: "50%", ease: "power2.inOut", duration: 1000 })
-    .to(stethoscopeHead.rotation, { x: Math.PI / 2, y: 0, z: 0, duration: 500 })
-    .to(stethoscopeHead.rotation, { x: Math.PI / 2, y: 0, z: Math.PI / -1, duration: 1500 })
-    .to(stethoscopeHead.rotation, { x: Math.PI, y: Math.PI, duration: 500 })
-    .to("#webgl", { top: "60%", ease: "power2.inOut", duration: 1000 })
+    .to(stethoscopeHead.rotation, { x: Math.PI / 2, y: 0, z: 0, duration: 800 })
+    .to("#webgl", { top: "50%", ease: "power2.inOut", duration: 1000 }, "<")
+    .to(stethoscopeHead.rotation, { x: Math.PI / 2, y: 0, z: Math.PI / -1, duration: 2000 })
+    .to(stethoscopeHead.rotation, { x: Math.PI / 2, y: 0, z: Math.PI / -1, duration: 2000 })
+    .to(stethoscopeHead.rotation, { x: Math.PI, y: Math.PI, duration: 1000 })
+    .to("#webgl", { top: "60%", ease: "power2.inOut", duration: 1000 }, "<")
     .to("#webgl", { opacity: 0, duration: 600 }); // Fade out
 
   // Resize
@@ -508,12 +612,3 @@ document.addEventListener("DOMContentLoaded", (event) => {
   });
 
 });
-
-  const rive = new rive.Rive({
-    src: './your_animation.riv',         // ✔️ make sure the path is correct
-    canvas: document.getElementById('riveCanvas'),
-    autoplay: true,
-    onLoad: () => {
-      console.log('Rive loaded!');
-    },
-  });
