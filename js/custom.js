@@ -611,4 +611,121 @@ document.addEventListener("DOMContentLoaded", (event) => {
     renderer.setSize(window.innerWidth, window.innerHeight);
   });
 
+  gsap.fromTo(".unlock",
+    { opacity: 0, scale: 1.3 },
+    {
+      opacity: 1,
+      scale: 1,
+      duration: 1.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".unlock",
+        start: "top 80%",
+        toggleActions: "play none none reverse"
+      }
+    }
+  );
+
+  gsap.fromTo(".built",
+    { opacity: 0, scale: 1.3 },
+    {
+      opacity: 1,
+      scale: 1,
+      duration: 1.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".built",
+        start: "top 80%",
+        toggleActions: "play none none reverse"
+      }
+    }
+  );
+
+  gsap.fromTo(".developed",
+    { opacity: 0, scale: 1.3 },
+    {
+      opacity: 1,
+      scale: 1,
+      duration: 1.2,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: ".developed",
+        start: "top 80%",
+        toggleActions: "play none none reverse"
+      }
+    }
+  );
+
+  const parts = Array.from(document.querySelectorAll('.part'));
+
+  parts.forEach((part, i) => {
+    const index = part.dataset.index;
+    const originalSrc = `./assets/img/keikku/${index}.png`;
+    const hoverSrc = `./assets/img/keikku/${index}-hover.png`;
+
+    part.addEventListener('mouseenter', () => {
+      // Fade and swap hovered image
+      gsap.to(part, {
+        duration: 0.1,
+        opacity: 0,
+        onComplete: () => {
+          part.src = hoverSrc;
+          gsap.to(part, {
+            opacity: 1,
+            duration: 0.15,
+            ease: "power1.out"
+          });
+        }
+      });
+
+      // Shift previous parts (negative)
+      for (let j = 0; j < i; j++) {
+        gsap.to(parts[j], {
+          x: -50,
+          y: -50,
+          duration: 0.2,
+          ease: "power1.out"
+        });
+      }
+
+      // Shift next parts (positive)
+      for (let j = i + 1; j < parts.length; j++) {
+        gsap.to(parts[j], {
+          x: 50,
+          y: 65,
+          duration: 0.2,
+          ease: "power1.out"
+        });
+      }
+    });
+
+    part.addEventListener('mouseleave', () => {
+      // Fade and reset hovered image
+      gsap.to(part, {
+        duration: 0.1,
+        opacity: 0,
+        onComplete: () => {
+          part.src = originalSrc;
+          gsap.to(part, {
+            opacity: 1,
+            duration: 0.15,
+            ease: "power1.out"
+          });
+        }
+      });
+
+      // Reset all other parts
+      parts.forEach((other, j) => {
+        if (j !== i) {
+          gsap.to(other, {
+            x: 0,
+            y: 0,
+            duration: 0.2,
+            ease: "power1.out"
+          });
+        }
+      });
+    });
+  });
+
 });
