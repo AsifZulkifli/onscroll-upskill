@@ -656,76 +656,274 @@ document.addEventListener("DOMContentLoaded", (event) => {
     }
   );
 
+  let footerKeikku = gsap.timeline({
+    scrollTrigger: {
+      trigger: '.footer-keikku',
+      start: '-90% center',
+      end: 'top center',
+      scrub: true,
+      markers: false
+    }
+  });
+
+  footerKeikku.to('.footer-keikku', {
+    y: -160, // Move up by 50 pixels
+    ease: 'none'
+  });
+
+
+//   const parts = Array.from(document.querySelectorAll('.part'));
+
+// // Map of custom explosion directions
+// const explodeMap = [
+//   { x: -100, y: -80},
+//   { x: -80, y: -60},
+//   { x: -60, y: -40},
+//   { x: -40, y: -20},
+//   { x: -20, y: -10},
+//   { x: 0, y: 0},
+//   { x: 20, y: 10},
+//   { x: 40, y: 20},
+//   { x: 60, y: 30},
+//   { x: 80, y: 40},
+//   { x: 100, y: 50},
+//   { x: 120, y: 60},
+//   { x: 140, y: 80},
+//   { x: 160, y: 100},
+// ];
+
+// parts.forEach((part, i) => {
+//   const index = part.dataset.index;
+//   const originalSrc = `./assets/img/keikku/${index}.png`;
+//   const hoverSrc = `./assets/img/keikku/${index}-hover.png`;
+
+//   part.addEventListener('mouseenter', () => {
+//     // Swap image with fade
+//     gsap.to(part, {
+//       opacity: 0,
+//       duration: 0.1,
+//       onComplete: () => {
+//         part.src = hoverSrc;
+//         gsap.to(part, {
+//           opacity: 1,
+//           duration: 0.15,
+//           ease: "power2.out"
+//         });
+//       }
+//     });
+
+//     // Animate other parts out
+//     parts.forEach((other, j) => {
+//       if (j !== i) {
+//         const offset = explodeMap[j];
+//         gsap.to(other, {
+//           x: offset.x,
+//           y: offset.y,
+//           duration: 0.4,
+//           ease: "power2.out"
+//         });
+//       }
+//     });
+//   });
+
+//   part.addEventListener('mouseleave', () => {
+//     // Reset hovered image
+//     gsap.to(part, {
+//       opacity: 0,
+//       duration: 0.1,
+//       onComplete: () => {
+//         part.src = originalSrc;
+//         gsap.to(part, {
+//           opacity: 1,
+//           duration: 0.15,
+//           ease: "power2.out"
+//         });
+//       }
+//     });
+
+//     // Reset all parts
+//     parts.forEach(other => {
+//       gsap.to(other, {
+//         x: 0,
+//         y: 0,
+//         scale: 1,
+//         duration: 0.4,
+//         ease: "power2.inOut"
+//       });
+//     });
+//   });
+// });
+
+  gsap.set(".discover-app-card", {
+    x: 0,
+    rotate: 0,
+    zIndex: (i) =>4  - i
+  });
+
+  gsap.to(".discover-app-card", {
+    x: (i) => (1.5 - i) * 170,      // centered spread
+  rotate: (i) => (1.5 - i) * 6, 
+    duration: 1,
+    ease: "power2.out",
+    stagger: 0.1,
+    scrollTrigger: {
+      trigger: ".discover-app-wrapper",
+      start: "10% 30%",
+      toggleActions: "play none none none",
+      markers: false
+    }
+  });
+
+});
+
+document.addEventListener("DOMContentLoaded", () => {
   const parts = Array.from(document.querySelectorAll('.part'));
 
+  // Explosion direction map
+  const entranceOffsets = [
+    { x: -300, y: -100, z: -100 },
+    { x: -260, y: -90, z: -80 },
+    { x: -220, y: -80, z: -60 },
+    { x: -180, y: -60, z: -40 },
+    { x: -140, y: -50, z: -20 },
+    { x: -100, y: -40, z: 0 },
+    { x: -60, y: -30, z: 10 },
+    { x: -20, y: -20, z: 20 },
+    { x: 20, y: -10, z: 30 },
+    { x: 60, y: 0, z: 40 },
+    { x: 100, y: 10, z: 50 },
+    { x: 140, y: 20, z: 60 },
+    { x: 180, y: 30, z: 70 },
+    { x: 220, y: 40, z: 80 }
+  ];
+
+  // 1. Sequential Load Animation
+  gsap.timeline({
+  scrollTrigger: {
+    trigger: ".relative",
+    start: "top 80%",
+    once: true
+  }
+  }).from(parts, {
+    opacity: 0,
+    x: i => entranceOffsets[i].x,
+    y: i => entranceOffsets[i].y,
+    z: i => entranceOffsets[i].z,
+    rotateZ: -15,
+    scale: 0.5,
+    stagger: 0.08,
+    duration: 1.2,
+    ease: "power3.out"
+  });
+
+  parts.forEach((part, i) => {
+    tl.fromTo(part,
+      {
+        opacity: 0,
+        x: -80,
+        y: -80,
+        rotateZ: -15,
+        scale: 0.6
+      },
+      {
+        opacity: 1,
+        x: 0,
+        y: 0,
+        rotateZ: 0,
+        scale: 1
+      },
+      i * 0.1 // Stagger animation
+    );
+  });
+
+  // 2. Hover and Leave Effects
   parts.forEach((part, i) => {
     const index = part.dataset.index;
     const originalSrc = `./assets/img/keikku/${index}.png`;
     const hoverSrc = `./assets/img/keikku/${index}-hover.png`;
 
     part.addEventListener('mouseenter', () => {
-      // Fade and swap hovered image
+      // Fade to hover image
       gsap.to(part, {
-        duration: 0.1,
         opacity: 0,
+        duration: 0.1,
         onComplete: () => {
           part.src = hoverSrc;
           gsap.to(part, {
             opacity: 1,
             duration: 0.15,
-            ease: "power1.out"
+            ease: "power2.out"
           });
         }
       });
 
-      // Shift previous parts (negative)
-      for (let j = 0; j < i; j++) {
-        gsap.to(parts[j], {
-          x: -50,
-          y: -50,
-          duration: 0.2,
-          ease: "power1.out"
-        });
-      }
-
-      // Shift next parts (positive)
-      for (let j = i + 1; j < parts.length; j++) {
-        gsap.to(parts[j], {
-          x: 50,
-          y: 65,
-          duration: 0.2,
-          ease: "power1.out"
-        });
-      }
+      // Animate others outward
+      parts.forEach((other, j) => {
+        if (j !== i) {
+          const offset = explodeMap[j];
+          gsap.to(other, {
+            x: offset.x,
+            y: offset.y,
+            rotateY: (j - i) * 5,
+            scale: 0.95,
+            duration: 0.4,
+            ease: "power2.out"
+          });
+        }
+      });
     });
 
     part.addEventListener('mouseleave', () => {
-      // Fade and reset hovered image
+      // Reset image
       gsap.to(part, {
-        duration: 0.1,
         opacity: 0,
+        duration: 0.1,
         onComplete: () => {
           part.src = originalSrc;
           gsap.to(part, {
             opacity: 1,
             duration: 0.15,
-            ease: "power1.out"
+            ease: "power2.out"
           });
         }
       });
 
-      // Reset all other parts
-      parts.forEach((other, j) => {
-        if (j !== i) {
-          gsap.to(other, {
-            x: 0,
-            y: 0,
-            duration: 0.2,
-            ease: "power1.out"
-          });
-        }
+      // Reset all parts
+      parts.forEach(other => {
+        gsap.to(other, {
+          x: 0,
+          y: 0,
+          rotateY: 0,
+          scale: 1,
+          duration: 0.4,
+          ease: "power2.inOut"
+        });
       });
     });
   });
 
 });
+
+const imgEl = document.getElementById("exploded-image");
+
+document.querySelectorAll(".hover-zone").forEach(zone => {
+  zone.addEventListener("mouseenter", (e) => {
+    const index = e.currentTarget.dataset.index;
+    const newSrc = `./assets/img/keikku-2/${index}.png`;
+
+    // Apply visual flash style
+    imgEl.classList.add("opacity-75", "blur-[1px]", "brightness-110");
+
+    setTimeout(() => {
+      imgEl.src = newSrc;
+
+      // Remove effect after a short delay
+      setTimeout(() => {
+        imgEl.classList.remove("opacity-75", "blur-[1px]", "brightness-110");
+      }, 150); // Let transition finish
+    }, 100);
+  });
+});
+
+
+

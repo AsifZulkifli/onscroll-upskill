@@ -39,6 +39,11 @@ body.loading {
   pointer-events: none;
 }
 
+.part {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
 .section {
   backface-visibility: hidden;
   transform: translate3d(0,0,0); /* GPU acceleration */
