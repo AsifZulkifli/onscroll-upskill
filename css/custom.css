@@ -60,6 +60,10 @@ body.loading {
   z-index: 10;
 }
 
+.card-expanded {
+  height: 380px;
+}
+
 .gradient-unlock {
   background: linear-gradient(180deg, #ffdada -2.89%, #5f20e4 90.86%);
   background-clip: text;
@@ -112,3 +116,9 @@ body.loading {
   bottom: -10% !important;
   z-index: 50 !important;
 }
+
+  .water-bg {
+    background: rgba(47, 50, 71, 0.1);
+    transform: translateX(-100%);
+    border-radius: 9999px;
+  }

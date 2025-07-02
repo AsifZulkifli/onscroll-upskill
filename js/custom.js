@@ -192,6 +192,42 @@ $(document).ready(function () {
 // use a script tag or an external JS file
 document.addEventListener("DOMContentLoaded", (event) => {
   gsap.registerPlugin(ScrollTrigger,ScrollSmoother)
+
+document.querySelectorAll('.nav-item').forEach(item => {
+    const bg = item.querySelector('.water-bg');
+
+    item.addEventListener('mouseenter', () => {
+      gsap.fromTo(bg, 
+        { x: '-100%' }, 
+        { x: '0%', duration: 0.6, ease: 'power2.out' }
+      );
+    });
+
+    item.addEventListener('mouseleave', () => {
+      gsap.to(bg, {
+        x: '100%',
+        duration: 0.6,
+        ease: 'power2.in'
+      });
+    });
+
+    // Optional: Add click "pulse" effect
+    item.addEventListener('mousedown', () => {
+      gsap.to(item, {
+        scale: 0.96,
+        duration: 0.1,
+        ease: 'power1.out'
+      });
+    });
+
+    item.addEventListener('mouseup', () => {
+      gsap.to(item, {
+        scale: 1,
+        duration: 0.2,
+        ease: 'power1.inOut'
+      });
+    });
+  });  
     
     ScrollSmoother.create({
       wrapper: '#smooth-wrapper',
@@ -348,6 +384,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
     tl4.fromTo(".card4", { opacity: 0 }, { opacity: 1, duration: 1 })
       .to(".card4", { opacity: 0, duration: 1 }); 
 
+
+const isMobile = window.innerWidth < 768;
+const expandedHeight = isMobile ? "240px" : "380px";
     
 // Step-by-step timeline animation
   const tl5 = gsap.timeline({
@@ -361,7 +400,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   // Step 1: expand height
   tl5.to("#card-crop", {
     opacity: 1,
-    height: "380px",
+    height: expandedHeight,
     duration: 0.8,
     ease: "power2.out"
   });
@@ -393,7 +432,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   // Step 1: expand height
   tl6.to("#card-crop2", {
     opacity: 1,
-    height: "380px",
+    height: expandedHeight,
     duration: 0.8,
     ease: "power2.out"
   }, "+=0.1");
@@ -425,7 +464,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   // Step 1: expand height
   tl7.to("#card-crop3", {
     opacity: 1,
-    height: "380px",
+    height: expandedHeight,
     duration: 0.8,
     ease: "power2.out"
   }, "+=0.2");
@@ -457,7 +496,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   // Step 1: expand height
   tl8.to("#card-crop4", {
     opacity: 1,
-    height: "380px",
+    height: expandedHeight,
     duration: 0.8,
     ease: "power2.out"
   }, "+=0.3");
@@ -489,7 +528,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   // Step 1: expand height
   tl9.to("#card-crop5", {
     opacity: 1,
-    height: "380px",
+    height: expandedHeight,
     duration: 0.8,
     ease: "power2.out"
   }, "+=0.4");
@@ -521,7 +560,7 @@ document.addEventListener("DOMContentLoaded", (event) => {
   // Step 1: expand height
   tl10.to("#card-crop6", {
     opacity: 1,
-    height: "380px",
+    height: expandedHeight,
     duration: 0.8,
     ease: "power2.out"
   }, "+=0.5");
@@ -541,9 +580,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
     ease: "power2.out"
   },); // start slightly before image ends
   
-
-  gsap.registerPlugin(ScrollTrigger);
-
   const canvas = document.getElementById('webgl');
   const scene = new THREE.Scene();
 
@@ -576,6 +612,19 @@ document.addEventListener("DOMContentLoaded", (event) => {
   stethoscopeHead.rotation.y = Math.PI / -5;
   stethoscopeHead.rotation.z = Math.PI / 4;
   scene.add(stethoscopeHead);
+
+  function adjustModelForScreenSize() {
+  const isMobile = window.innerWidth < 768;
+
+  if (isMobile) {
+    stethoscopeHead.scale.set(0.6, 0.6, 0.6);
+  } else {
+    stethoscopeHead.scale.set(1, 1, 1);
+  }
+}
+
+// Call once on load
+adjustModelForScreenSize();
 
   // Animate
   function animate() {
@@ -667,92 +716,9 @@ document.addEventListener("DOMContentLoaded", (event) => {
   });
 
   footerKeikku.to('.footer-keikku', {
-    y: -160, // Move up by 50 pixels
+    y: -65,
     ease: 'none'
   });
-
-
-//   const parts = Array.from(document.querySelectorAll('.part'));
-
-// // Map of custom explosion directions
-// const explodeMap = [
-//   { x: -100, y: -80},
-//   { x: -80, y: -60},
-//   { x: -60, y: -40},
-//   { x: -40, y: -20},
-//   { x: -20, y: -10},
-//   { x: 0, y: 0},
-//   { x: 20, y: 10},
-//   { x: 40, y: 20},
-//   { x: 60, y: 30},
-//   { x: 80, y: 40},
-//   { x: 100, y: 50},
-//   { x: 120, y: 60},
-//   { x: 140, y: 80},
-//   { x: 160, y: 100},
-// ];
-
-// parts.forEach((part, i) => {
-//   const index = part.dataset.index;
-//   const originalSrc = `./assets/img/keikku/${index}.png`;
-//   const hoverSrc = `./assets/img/keikku/${index}-hover.png`;
-
-//   part.addEventListener('mouseenter', () => {
-//     // Swap image with fade
-//     gsap.to(part, {
-//       opacity: 0,
-//       duration: 0.1,
-//       onComplete: () => {
-//         part.src = hoverSrc;
-//         gsap.to(part, {
-//           opacity: 1,
-//           duration: 0.15,
-//           ease: "power2.out"
-//         });
-//       }
-//     });
-
-//     // Animate other parts out
-//     parts.forEach((other, j) => {
-//       if (j !== i) {
-//         const offset = explodeMap[j];
-//         gsap.to(other, {
-//           x: offset.x,
-//           y: offset.y,
-//           duration: 0.4,
-//           ease: "power2.out"
-//         });
-//       }
-//     });
-//   });
-
-//   part.addEventListener('mouseleave', () => {
-//     // Reset hovered image
-//     gsap.to(part, {
-//       opacity: 0,
-//       duration: 0.1,
-//       onComplete: () => {
-//         part.src = originalSrc;
-//         gsap.to(part, {
-//           opacity: 1,
-//           duration: 0.15,
-//           ease: "power2.out"
-//         });
-//       }
-//     });
-
-//     // Reset all parts
-//     parts.forEach(other => {
-//       gsap.to(other, {
-//         x: 0,
-//         y: 0,
-//         scale: 1,
-//         duration: 0.4,
-//         ease: "power2.inOut"
-//       });
-//     });
-//   });
-// });
 
   gsap.set(".discover-app-card", {
     x: 0,
@@ -775,72 +741,6 @@ document.addEventListener("DOMContentLoaded", (event) => {
   });
 
 });
-
-document.addEventListener("DOMContentLoaded", () => {
-  const parts = Array.from(document.querySelectorAll('.part'));
-
-  // Explosion direction map
-  const entranceOffsets = [
-    { x: -300, y: -100, z: -100 },
-    { x: -260, y: -90, z: -80 },
-    { x: -220, y: -80, z: -60 },
-    { x: -180, y: -60, z: -40 },
-    { x: -140, y: -50, z: -20 },
-    { x: -100, y: -40, z: 0 },
-    { x: -60, y: -30, z: 10 },
-    { x: -20, y: -20, z: 20 },
-    { x: 20, y: -10, z: 30 },
-    { x: 60, y: 0, z: 40 },
-    { x: 100, y: 10, z: 50 },
-    { x: 140, y: 20, z: 60 },
-    { x: 180, y: 30, z: 70 },
-    { x: 220, y: 40, z: 80 }
-  ];
-
-  // 1. Sequential Load Animation
-  gsap.timeline({
-  scrollTrigger: {
-    trigger: ".relative",
-    start: "top 80%",
-    once: true
-  }
-  }).from(parts, {
-    opacity: 0,
-    x: i => entranceOffsets[i].x,
-    y: i => entranceOffsets[i].y,
-    z: i => entranceOffsets[i].z,
-    rotateZ: -15,
-    scale: 0.5,
-    stagger: 0.08,
-    duration: 1.2,
-    ease: "power3.out"
-  });
-
-  parts.forEach((part, i) => {
-    tl.fromTo(part,
-      {
-        opacity: 0,
-        x: -80,
-        y: -80,
-        rotateZ: -15,
-        scale: 0.6
-      },
-      {
-        opacity: 1,
-        x: 0,
-        y: 0,
-        rotateZ: 0,
-        scale: 1
-      },
-      i * 0.1 // Stagger animation
-    );
-  });
-
-  // 2. Hover and Leave Effects
-  parts.forEach((part, i) => {
-    const index = part.dataset.index;
-    const originalSrc = `./assets/img/keikku/${index}.png`;
-    const hoverSrc = `./assets/img/keikku/${index}-hover.png`;
 
     part.addEventListener('mouseenter', () => {
       // Fade to hover image
@@ -900,16 +800,13 @@ document.addEventListener("DOMContentLoaded", () => {
         });
       });
     });
-  });
-
-});
 
 const imgEl = document.getElementById("exploded-image");
 
 document.querySelectorAll(".hover-zone").forEach(zone => {
   zone.addEventListener("mouseenter", (e) => {
     const index = e.currentTarget.dataset.index;
-    const newSrc = `./assets/img/keikku-2/${index}.png`;
+    const newSrc = `./assets/img/keikku/${index}.png`;
 
     // Apply visual flash style
     imgEl.classList.add("opacity-75", "blur-[1px]", "brightness-110");
